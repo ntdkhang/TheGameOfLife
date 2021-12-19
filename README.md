@@ -1,6 +1,6 @@
 # Conway's Game of Life
 
-RULES
+Rules
 -
 
 Conway's Game of Life is a zero-player game where the game starts with some inital stage and continue step by step, following these rules:
@@ -19,10 +19,15 @@ Conway's Game of Life is a zero-player game where the game starts with some init
 
 
 
-TECH
+Tech
 -
 
 Implemented this with SwiftUI and Canvas
 
 
-Saw someone on Twitter talked about making this game using Canvas so I decided to do the same :D 
+
+To-do
+-
++ Create presets for the initial stage
++ Infinite map
++ Finite but the cells at the edge can interact with cells from the other side of the screen.
