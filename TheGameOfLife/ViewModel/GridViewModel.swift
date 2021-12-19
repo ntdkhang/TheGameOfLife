@@ -122,8 +122,8 @@ class GridViewModel: ObservableObject {
         for indexX in 0..<width {
             grid.append([Cell]())
             for indexY in 0..<height {
-                let randomInt = Int.random(in: 0...1)
-                let state = randomInt == 0 ? Cell.State.off : Cell.State.on
+                let randomInt = Int.random(in: 0...8)
+                let state = randomInt == 0 ? Cell.State.on : Cell.State.off
                 grid[indexX].append(Cell(indexX: indexX, indexY: indexY, state: state))
             }
         }

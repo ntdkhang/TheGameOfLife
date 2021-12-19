@@ -10,7 +10,7 @@ import SwiftUI
 struct GameScreen: View {
     @ObservedObject var gridViewModel = GridViewModel()
     
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     var gridLineWidth: CGFloat = 3
     var body: some View {
         Canvas { context, size in
@@ -20,7 +20,7 @@ struct GameScreen: View {
                     context.stroke(gridViewModel.getSquarePathAtIndex(x: width,
                                                                       y: height,
                                                                       screenSize: size),
-                                   with: .color(.red))
+                                   with: .backdrop)
                     
                     if gridViewModel.grid[width][height].state == .on {
                         fillASquare(context: context,
@@ -55,7 +55,7 @@ struct GameScreen: View {
                                     y: (origin.y) + CGFloat(i) * (gridLineWidth)*0.5)
             context.stroke(Path(CGRect(origin: newOrigin,
                                          size: rectSize)),
-                           with: .color(.blue),
+                           with: .color(.cyan),
                            lineWidth: gridLineWidth)
         }
     }
