@@ -11,7 +11,7 @@ import Foundation
 class GridViewModel: ObservableObject {
     @Published var grid: [[Cell]] // the grid uses the index that is equivalent to the coordination system
     // with (0,0) at top left and (width - 1, height - 1) at bottom right
-    private(set) var oneSquareLength: Int = 15
+    private(set) var oneSquareLength: Int = 30
     private(set) var width: Int = 0
     private(set) var height: Int = 0
     private var screenSize: CGSize = .zero
@@ -174,6 +174,8 @@ class GridViewModel: ObservableObject {
             self.screenSize = size
             self.width = getGridWidth(size: size)
             self.height = getGridHeight(size: size)
+            
+            fillGridRandomly()
         }
     }
     
@@ -188,17 +190,25 @@ class GridViewModel: ObservableObject {
     }
     
     
+    private func fillGridRandomly() {
+        grid = [[Cell]]()
+        for indexX in 0..<width {
+            grid.append([Cell]())
+            for indexY in 0..<height {
+                let randomInt = Int.random(in: 0...1)
+                let state = randomInt == 0 ? Cell.State.off : Cell.State.on
+                grid[indexX].append(Cell(indexX: indexX, indexY: indexY, state: state))
+            }
+        }
+    }
     
     init() {
         grid = [[Cell]]()
         self.width = 0
         self.height = 0
         self.screenSize = .zero
-        for indexY in 0..<height {
-            for indexX in 0..<width {
-                grid[indexX][indexY] = Cell(indexX: indexX, indexY: indexY)
-            }
-        }
+        fillGridRandomly()
+        
     }
     
 }

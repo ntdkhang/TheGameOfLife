@@ -20,6 +20,20 @@ struct GameScreen: View {
                                                                       y: height,
                                                                       screenSize: size),
                                    with: .color(.red))
+                    
+                    //                    print(gridViewModel.grid)
+                    if gridViewModel.grid[width][height].state == .on {
+                        fillASquare(context: context,
+                                    outerPath: gridViewModel.getSquarePathAtIndex(x: width,
+                                                                                  y: height,
+                                                                                  screenSize: size))
+
+
+//                        let outerPath = gridViewModel.getSquarePathAtIndex(x: width,
+//                                                                           y: height,
+//                                                                           screenSize: size)
+
+                    }
                 }
             }
             
@@ -28,6 +42,32 @@ struct GameScreen: View {
             gridViewModel.nextIteration()
         }
 //        SparkleSwing()
+    }
+    
+    func fillASquare(context: GraphicsContext, outerPath: Path) {
+        let outerRect = outerPath.boundingRect
+        let origin = outerRect.origin
+        let numOfStroke = gridViewModel.oneSquareLength / (Int(gridLineWidth)) //
+//        for i in 1...numOfStroke {
+//            let rectSize = CGSize(width: gridViewModel.oneSquareLength - i * Int(gridLineWidth),
+//                                  height: gridViewModel.oneSquareLength - i * Int(gridLineWidth))
+//            let newOrigin = CGPoint(x: Int(origin.x) + i * Int(gridLineWidth),
+//                                    y: Int(origin.y) + i * Int(gridLineWidth))
+//            context.stroke(Path(CGRect(origin: newOrigin,
+//                                         size: rectSize)),
+//                           with: .color(.blue))
+//        }
+        
+        for i in 1...numOfStroke {
+            let rectSize = CGSize(width: gridViewModel.oneSquareLength - i * Int(gridLineWidth),
+                                  height: gridViewModel.oneSquareLength - i * Int(gridLineWidth))
+            let newOrigin = CGPoint(x: (origin.x) + CGFloat(i) * (gridLineWidth)*0.5,
+                                    y: (origin.y) + CGFloat(i) * (gridLineWidth)*0.5)
+            context.stroke(Path(CGRect(origin: newOrigin,
+                                         size: rectSize)),
+                           with: .color(.blue),
+                           lineWidth: gridLineWidth)
+        }
     }
     
 }
