@@ -11,7 +11,7 @@ import Foundation
 class GridViewModel: ObservableObject {
     @Published var grid: [[Cell]] // the grid uses the index that is equivalent to the coordination system
     // with (0,0) at top left and (width - 1, height - 1) at bottom right
-    private(set) var oneSquareLength: Int = 30
+    private(set) var oneSquareLength: Int = 20
     private(set) var width: Int = 0
     private(set) var height: Int = 0
     private var screenSize: CGSize = .zero
@@ -59,25 +59,6 @@ class GridViewModel: ObservableObject {
               (6,4)
          */
         
-        // Normal case
-        // is west
-        // is east
-        // is north
-        // is south
-        // is north west
-        // is north east
-        // is south east
-        // is south west
-        
-//        let countNeighbors: Int = {
-//            Int(isWestNeighbor(cell: cell)) + Int(isEastNeighbor(cell: cell)) +
-//            Int(isNorthNeighbor(cell: cell)) +
-//            Int(isSouthNeighbor(cell: cell)) +
-//            Int(isNorthWestNeighbor(cell: cell)) +
-//            Int(isNorthEastNeighbor(cell: cell)) +
-//            Int(isSouthEastNeighbor(cell: cell)) +
-//            Int(isSouthWestNeighbor(cell: cell))
-//        }()
         var countNeighbors = 0
         if (isWestNeighbor(cell: cell)) { countNeighbors += 1 }
         if (isEastNeighbor(cell: cell)) { countNeighbors += 1 }
@@ -91,61 +72,7 @@ class GridViewModel: ObservableObject {
         return countNeighbors
     }
     
-    private func isSouthWestNeighbor(cell: Cell) -> Bool {
-        if (cell.indexX > 0 && cell.indexY < self.height - 1) {
-            return grid[cell.indexX - 1][cell.indexY + 1].state == .on
-        }
-        return false
-    }
     
-    private func isSouthEastNeighbor(cell: Cell) -> Bool {
-        if (cell.indexX < self.width - 1 && cell.indexY < self.height - 1) {
-            return grid[cell.indexX + 1][cell.indexY + 1].state == .on
-        }
-        return false
-    }
-    
-    private func isNorthEastNeighbor(cell: Cell) -> Bool {
-        if (cell.indexX < self.width - 1 && cell.indexY > 0) {
-            return grid[cell.indexX + 1][cell.indexY - 1].state == .on
-        }
-        return false
-    }
-    
-    private func isNorthWestNeighbor(cell: Cell) -> Bool {
-        if (cell.indexY > 0 && cell.indexX > 0) {
-            return grid[cell.indexX - 1][cell.indexY - 1].state == .on
-        }
-        return false
-    }
-    
-    private func isSouthNeighbor(cell: Cell) -> Bool {
-        if (cell.indexY < self.height - 1) {
-            return grid[cell.indexX][cell.indexY + 1].state == .on
-        }
-        return false
-    }
-    
-    private func isNorthNeighbor(cell: Cell) -> Bool {
-        if (cell.indexY > 0) {
-            return grid[cell.indexX][cell.indexY - 1].state == .on
-        }
-        return false
-    }
-    
-    private func isWestNeighbor(cell: Cell) -> Bool {
-        if (cell.indexX > 0) {
-            return grid[cell.indexX - 1][cell.indexY].state == .on
-        }
-        return false
-    }
-    
-    private func isEastNeighbor(cell: Cell) -> Bool {
-        if (cell.indexX < self.width - 1) {
-            return grid[cell.indexX + 1][cell.indexY].state == .on
-        }
-        return false
-    }
     
     
     
@@ -235,7 +162,63 @@ extension Cell {
 }
 
 
-
+extension GridViewModel {
+    private func isSouthWestNeighbor(cell: Cell) -> Bool {
+        if (cell.indexX > 0 && cell.indexY < self.height - 1) {
+            return grid[cell.indexX - 1][cell.indexY + 1].state == .on
+        }
+        return false
+    }
+    
+    private func isSouthEastNeighbor(cell: Cell) -> Bool {
+        if (cell.indexX < self.width - 1 && cell.indexY < self.height - 1) {
+            return grid[cell.indexX + 1][cell.indexY + 1].state == .on
+        }
+        return false
+    }
+    
+    private func isNorthEastNeighbor(cell: Cell) -> Bool {
+        if (cell.indexX < self.width - 1 && cell.indexY > 0) {
+            return grid[cell.indexX + 1][cell.indexY - 1].state == .on
+        }
+        return false
+    }
+    
+    private func isNorthWestNeighbor(cell: Cell) -> Bool {
+        if (cell.indexY > 0 && cell.indexX > 0) {
+            return grid[cell.indexX - 1][cell.indexY - 1].state == .on
+        }
+        return false
+    }
+    
+    private func isSouthNeighbor(cell: Cell) -> Bool {
+        if (cell.indexY < self.height - 1) {
+            return grid[cell.indexX][cell.indexY + 1].state == .on
+        }
+        return false
+    }
+    
+    private func isNorthNeighbor(cell: Cell) -> Bool {
+        if (cell.indexY > 0) {
+            return grid[cell.indexX][cell.indexY - 1].state == .on
+        }
+        return false
+    }
+    
+    private func isWestNeighbor(cell: Cell) -> Bool {
+        if (cell.indexX > 0) {
+            return grid[cell.indexX - 1][cell.indexY].state == .on
+        }
+        return false
+    }
+    
+    private func isEastNeighbor(cell: Cell) -> Bool {
+        if (cell.indexX < self.width - 1) {
+            return grid[cell.indexX + 1][cell.indexY].state == .on
+        }
+        return false
+    }
+}
 
 
 

@@ -58,7 +58,7 @@
 				42213C2027566BF9007EA262 /* TheGameOfLifeApp.swift */,
 				42213C2227566BF9007EA262 /* ContentView.swift */,
 				42213C2E27566CCA007EA262 /* GameScreen.swift */,
-				4212A51627671CB500CEB001 /* GridViewModel.swift */,
+				42481729276FC36A00920CAF /* ViewModel */,
 				42213C2427566C02007EA262 /* Assets.xcassets */,
 				42213C2627566C02007EA262 /* Preview Content */,
 			);
@@ -71,6 +71,14 @@
 				42213C2727566C02007EA262 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		42481729276FC36A00920CAF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4212A51627671CB500CEB001 /* GridViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
